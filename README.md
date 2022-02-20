@@ -7,4 +7,4 @@ Our first goal is to stage Vircadia domain servers using different builders. Onc
 
 Our third goal will be deployment orchestration using Hashicorp's Vagrant and Terraform tools to create load ballancing Vircadia domain servers and Kubernetes clusters... Most of this is trial and error so expect development of these technologies to move at a snails pace.
 
-We will extend this readme as we move forward... for now, you will find instructions for using the different builds in each of the build folders. If you need help, please feel free ask for help from others or myself @hapticmonkey in the Vircadia Discord https://discord.gg/5WVz5ubU or in the Vircadia forums https://forum.vircadia.com/.
+We will extend this readme as we move forward... for now, you will find instructions for using the different builds in each of the Packer build folders. If you need help, please feel free ask for help from others or myself @hapticmonkey in the Vircadia Discord https://discord.gg/5WVz5ubU or in the Vircadia forums https://forum.vircadia.com/.
