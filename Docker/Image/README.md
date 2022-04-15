@@ -47,7 +47,7 @@ c795be0de853   vircadia   "/bin/bash"   25 minutes ago   Up 25 minutes          
 
 docker kill c795be0de853
 docker rm c795be0de853
-docker pa -a
+docker ps -a
 
 CONTAINER ID   IMAGE      COMMAND       CREATED          STATUS          PORTS     NAMES
 ```
