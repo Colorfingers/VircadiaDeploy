@@ -176,7 +176,7 @@ docker commit <CONTAINER ID> <USER ID>/vircadia-server-u20.04:2022.1.1_selene
 
 # Logon to your docker or other repository.  Obtain a personal access token so you do not have to use your password.
 https://hub.docker.com/settings/security
-```
+
 docker login -u <USER ID>
 # When you get prompted for your password enter the personal access token.
 password: <TOKEN>
