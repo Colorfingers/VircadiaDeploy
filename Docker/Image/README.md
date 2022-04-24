@@ -18,6 +18,7 @@ cd VircadiaDeploy/Docker/Image
 
 -3. Execute the batch script
 ```
+chmod +x bootstrap.sh
 ./bootstrap.sh
 ```
 
