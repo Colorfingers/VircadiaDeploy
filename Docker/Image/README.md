@@ -2,7 +2,7 @@
 
 The well of knowlege concerning Docker images is indeed deep.  Docker is a technology that allows you to install software within portable containers. Since it only requires the OS kernal to run they can be relatively small. If you are not familiar with Docker that's OK. We'll show you what you need to know to get going. The images we will be discussing here are based upon Ubuntu Server 20.4.04. We will update to a later distro whenever approprieate. We will show you how to deploy a running Vircadia server on a Docker container and provide you some knowledge of it works. To save time we will discuss how to run the deployment we have provided.  Then we will explain how to build an image on your own. We recommend you run this on Ubuntu Server 20.4.04 with Docker installed and Internet access. The container should run on other flavors of Linux but have not been tested.
 
-The bootscript will run the domain-server and assignment clients in one container. You can experiment with different ports and options for the assignment clients if you choose. In this situation this really is not necessary.  
+The bootstrap script will run the domain-server and assignment clients in one container. You can experiment with different ports and options for the assignment clients if you choose. In this situation this really is not necessary.  
 
 ## Deploy the Vircadia Container
 
@@ -16,7 +16,7 @@ git clone https://github.com/Colorfingers/VircadiaDeploy.git
 cd VircadiaDeploy/Docker/Image
 ```
 
--3. Execute the batch script
+-3. Execute the bootstrap batch script
 ```
 chmod +x bootstrap.sh
 ./bootstrap.sh
