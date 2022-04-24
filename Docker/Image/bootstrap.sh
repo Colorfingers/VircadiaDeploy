@@ -25,26 +25,18 @@ chmod 777 "${LOGDIR}"
 # To enable logging change LOGGING to ${LOGOFF} or ${LOGON}
 LOGOFF="/dev/null"
 LOGON="${LOGDIR}/domain-server.log"
-LOGGING="${LOGOFF}"
+LOGGING="${LOGON}"
 
 echo ""
 echo "Launch the 'vircadia' Image..."
 # LAUNCH NEW CONTAINER WITH OPEN PORTS
 # RUN CONTAINER WITH NAME DOMAIN_SERVER
-# Container will restart on host system reboot
-# Unless you manually stop it
-# To make all running containers start automatically on system reboot
-# docker update --restart unless-stopped $(docker ps -q)
-docker run -dit --restart unless-stopped --name domainserver -e METAVERSE_URL=${METAVERSE_URL} --network=host -v ${CONFIGDIR}:/var/lib/vircadia:z vircadia
+docker run -dit --name domainserver -e METAVERSE_URL=${METAVERSE_URL} --network=host -v ${CONFIGDIR}:/var/lib/vircadia:z vircadia
 
 echo ""
 echo "Run the Domain Server... "
 # LAUNCH THE DOMAIN SERVER IN BACKGROUND
-#docker exec -u vircadia domainserver export PATH=$PATH:/opt/vircadia/domain-server/
 docker exec -u vircadia domainserver ./opt/vircadia/domain-server &> ${LOGGING} &
-# &> /dev/null & 
-# Prints logging to file
-# &> "${LOGDIR}"/domain-server.log &
 
 echo ""
 echo "Run the Assignment Clients..."
