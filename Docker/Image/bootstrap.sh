@@ -25,7 +25,7 @@ chmod 777 "${LOGDIR}"
 # To enable logging change LOGGING to ${LOGOFF} or ${LOGON}
 LOGOFF="/dev/null"
 LOGON="${LOGDIR}/domain-server.log"
-LOGGING="${LOGON}"
+LOGGING="${LOGOFF}"
 
 echo ""
 echo "Launch the 'vircadia' Image..."
