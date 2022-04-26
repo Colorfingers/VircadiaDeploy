@@ -116,7 +116,7 @@ NOTE: Technically you can run the container on any Linux distribution.  We recom
 
 https://releases.ubuntu.com/20.04.4/ubuntu-20.04.4-live-server-amd64.iso
 
--1. Run the following command from the terminal to pull the Ubuntu 20.4 image from Github.com (You can pull it from another repository if you know one). You will be working inside the container from this moment on.  The command puts you in the terminal of the container.
+-1. Run the following command from the terminal to pull the Ubuntu 20.4 image from hub.docker.com (You can pull it from another repository if you know one). You will be working inside the container from this moment on.  The command puts you in the terminal of the container.
 ```
 docker run -it --entrypoint "/bin/bash" -e METAVERSE_URL=${METAVERSE_URL} --network=host ubuntu:20.04
 ```
@@ -165,6 +165,9 @@ export HIFI_ASSIGNMENT_CLIENT_ENTITIES_SERVER_PORT=48006
 ```
 -7. Commit and push you docker container to your repository.  You do not need to stop the container to commit it. Docker will pause it while it's being committed. 
 ```
+# Press CTRL-p and q
+# This will put you back at the bash prompt of the host without killing the container.
+
 # Get the CONTAINER ID
 docker ps -a
 
