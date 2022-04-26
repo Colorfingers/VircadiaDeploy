@@ -167,7 +167,7 @@ export HIFI_ASSIGNMENT_CLIENT_ENTITIES_SERVER_PORT=48006
 ./opt/vircadia/assignment-client -n 6 &
 
 ```
--7. Commit and push you docker container to your repository.  You do not need to stop the container to commit it. Docker will pause it while it's being committed. 
+-7. Commit and push your docker container to your repository.  You do not need to stop the container to commit it. Docker will pause it while it's being committed. 
 ```
 # Press CTRL-p and q
 # This will put you back at the bash prompt of the host without killing the container.
