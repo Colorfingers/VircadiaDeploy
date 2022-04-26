@@ -118,6 +118,10 @@ https://releases.ubuntu.com/20.04.4/ubuntu-20.04.4-live-server-amd64.iso
 
 -1. Run the following command from the terminal to pull the Ubuntu 20.4 image from hub.docker.com (You can pull it from another repository if you know one). You will be working inside the container from this moment on.  The command puts you in the terminal of the container.
 ```
+# Tell tell the image the location of the Metaverse server
+METAVERSE_URL=${METAVERSE_URL:-https://metaverse.vircadia.com/live}
+
+# Run the docker container
 docker run -it --entrypoint "/bin/bash" -e METAVERSE_URL=${METAVERSE_URL} --network=host ubuntu:20.04
 ```
 -2. Update the container
