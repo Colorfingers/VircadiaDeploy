@@ -118,9 +118,6 @@ https://releases.ubuntu.com/20.04.4/ubuntu-20.04.4-live-server-amd64.iso
 
 -1. Run the following command from the terminal to pull the Ubuntu 20.4 image from hub.docker.com (You can pull it from another repository if you know one). You will be working inside the container from this moment on.  The command puts you in the terminal of the container.
 ```
-# Tell tell the image the location of the Metaverse server
-METAVERSE_URL=${METAVERSE_URL:-https://metaverse.vircadia.com/live}
-
 # Run the docker container
 docker run -it --entrypoint "/bin/bash" -e METAVERSE_URL=${METAVERSE_URL} --network=host ubuntu:20.04
 ```
@@ -159,7 +156,7 @@ export HIFI_ASSIGNMENT_CLIENT_ASSET_SERVER_PORT=48003
 export HIFI_ASSIGNMENT_CLIENT_MESSAGES_MIXER_PORT=48004 
 export HIFI_ASSIGNMENT_CLIENT_ENTITY_SCRIPT_SERVER_PORT=48005 
 export HIFI_ASSIGNMENT_CLIENT_ENTITIES_SERVER_PORT=48006 
-
+export METAVERSE_URL=${METAVERSE_URL:-https://metaverse.vircadia.com/live}
 ```
 -6. Start the domain-server and assignment clients
 ```
