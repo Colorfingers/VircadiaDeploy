@@ -37,6 +37,8 @@ Once the script is finished you will have a running docker container running the
 ```
 You should setup configuration at the console GUI running at the given address... Ensure to use a very strong password. The running container is sharing a volume with the configuration data on your host. If your host reboots or you shutdown your image you will need to remove the existing image and run the bootstrap script again.  Logging is intentionally turned off and must be set in the bootstrap script prior to running it if you want to examine the logs.  You will have to manually kill the container and remove it before re-running the bootstrap script to enable logging.  Your configuration data is still on your host so when you rebuild the container it will be restored to the condition before you shut it down.
 
+# Useful Commands
+
 Show images:
 ```
 docker images

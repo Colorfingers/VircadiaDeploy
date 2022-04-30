@@ -22,6 +22,8 @@ chmod o+s "${CONFIGDIR}"
 mkdir -p "${LOGDIR}"
 chmod 777 "${LOGDIR}"
 
+echo "You can ignore 'Operation not permitted' errors. This only happens if you already have the local directories."
+
 # To enable logging change LOGGING to ${LOGOFF} or ${LOGON}
 LOGOFF="/dev/null"
 LOGON="${LOGDIR}/domain-server.log"

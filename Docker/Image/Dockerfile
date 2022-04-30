@@ -22,7 +22,8 @@ HIFI_ASSIGNMENT_CLIENT_MESSAGES_MIXER_PORT=48004 \
 HIFI_ASSIGNMENT_CLIENT_ENTITY_SCRIPT_SERVER_PORT=48005 \
 HIFI_ASSIGNMENT_CLIENT_ENTITIES_SERVER_PORT=48006 \
 \
-LD_LIBRARY_PATH=$LD_LIBRARY_PATH:/usr/local/lib/:/usr/lib/:/usr/lib64/:/opt/vircadia/lib
+LD_LIBRARY_PATH=$LD_LIBRARY_PATH:/usr/local/lib/:/usr/lib/:/usr/lib64/:/opt/vircadia/lib \
+PATH=$PATH:/opt/vircadia
 
 # Attempt to make the config files readable on host...
 RUN chmod 1777 /var/lib/vircadia

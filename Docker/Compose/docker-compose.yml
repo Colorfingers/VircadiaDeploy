@@ -1,0 +1,139 @@
+# This Docker Compose file will run all the servers each in their own container
+# They share the same environment file which is called domain-vars.env
+# It relies on the same Dockerfile in the Images folder
+# It shares the same directory we created with the dockerfile build
+# Any data saved will be read when you load either by dockerfile or docker-compose
+
+version: "3.9"
+services:
+# LAUNCH THE DOMAIN-SERVER IN A CONTAINER
+  domain-server:
+    env_file: domain-vars.env
+    restart: always  
+    image: colorfingers/vircadia-server-u20.04:vircadia
+    build: 
+      context: ../Image/
+    network_mode: "host"             
+    ports:
+      - "40100-40103:40100-40103"
+    volumes: 
+      - ~/d_vircadia/config:/var/lib/vircadia
+    entrypoint: [ "bash", "-l", "-c" ]
+    command: /opt/vircadia/domain-server 
+
+# LAUNCH THE ASSIGNMENT CLIENTS EACH IN A CONTAINER
+# -h = help
+# -v = version
+# -t = type
+### 0 = audio-mixer
+### 1 = avatar-mixer
+### 2 = agent
+### 3 = asset-server
+### 4 = message-mixer
+### 5 = entity-script-server
+### 6 = entity-server
+# -n = number of child assignment clients to fork
+# -p = port number
+# -a = Domain server host name
+# --pool = Identifies a pool of assignment clients... can be of different hosts
+# --min = minimum number of assignment clients
+# --max = maximum number of assignment clients
+# --server-port = assignm    
+
+  assignment_client_audio_mixer:
+    env_file: domain-vars.env  
+    restart: always    
+    image: colorfingers/vircadia-server-u20.04:vircadia
+    build: 
+      context: ../Image/
+    network_mode: "host"       
+    ports:
+      - "48000:48000"
+    links:
+      - domain-server:assignment_client_audio_mixer      
+    entrypoint: [ "bash", "-l", "-c" ]
+    command: /opt/vircadia/assignment-client -n 1 -t 0 -p 48000 --server-port 40100 
+
+  assignment_client_avatar_mixer:
+    env_file: domain-vars.env  
+    restart: always    
+    image: colorfingers/vircadia-server-u20.04:vircadia
+    build: 
+      context: ../Image/
+    network_mode: "host"       
+    ports:
+      - "48001:48001"
+    links:
+      - domain-server:assignment_client_avatar_mixer
+    entrypoint: [ "bash", "-l", "-c" ]  
+    command: /opt/vircadia/assignment-client -n 1 -t 1 -p 48001 --server-port 40100 
+
+  assignment_client_agent:
+    env_file: domain-vars.env  
+    restart: always    
+    image: colorfingers/vircadia-server-u20.04:vircadia
+    build: 
+      context: ../Image/ 
+    network_mode: "host"      
+    ports:
+      - "48002:48002"
+    links:
+      - domain-server:assignment_client_agent         
+    entrypoint: [ "bash", "-l", "-c" ]  
+    command: /opt/vircadia/assignment-client -n 1 -t 2 -p 48002 --server-port 40100 
+
+  assignment_client_asset_server:
+    env_file: domain-vars.env  
+    restart: always    
+    image: colorfingers/vircadia-server-u20.04:vircadia
+    build: 
+      context: ../Image/   
+    network_mode: "host"    
+    ports:
+      - "48003:48003"
+    links:
+      - domain-server:assignment_client_asset_server      
+    entrypoint: [ "bash", "-l", "-c" ]  
+    command: /opt/vircadia/assignment-client -n 1 -t 3 -p 48003 --server-port 40100      
+
+  assignment_client_message_mixer:
+    env_file: domain-vars.env  
+    restart: always      
+    image: colorfingers/vircadia-server-u20.04:vircadia
+    build: 
+      context: ../Image/   
+    network_mode: "host"    
+    ports:
+      - "48004:48004"
+    links:
+      - domain-server:assignment_client_message_mixer
+    entrypoint: [ "bash", "-l", "-c" ]  
+    command: /opt/vircadia/assignment-client -n 1 -t 4 -p 48004 --server-port 40100 
+
+  assignment_client_entity_script_server:
+    env_file: domain-vars.env  
+    restart: always      
+    image: colorfingers/vircadia-server-u20.04:vircadia
+    build: 
+      context: ../Image/    
+    network_mode: "host"
+    ports:
+      - "48005:48005"
+    links:
+      - domain-server:assignment_client_entity_script_server
+    entrypoint: [ "bash", "-l", "-c" ]  
+    command: /opt/vircadia/assignment-client -n 1 -t 5 -p 48005 --server-port 40100  
+
+  assignment_client_entities_server:
+    env_file: domain-vars.env  
+    restart: always      
+    image: colorfingers/vircadia-server-u20.04:vircadia
+    build: 
+      context: ../Image/  
+    network_mode: "host"     
+    ports:
+      - "48006:48006"
+    links:
+      - domain-server:assignment_client_entities_server       
+    entrypoint: [ "bash", "-l", "-c" ]  
+    command: /opt/vircadia/assignment-client -n 1 -t 6 -p 48006 --server-port 40100 
