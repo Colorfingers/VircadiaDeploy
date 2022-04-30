@@ -35,7 +35,7 @@ Once the script is finished you will have a running docker container running the
 #                                                                                                            #
 ##############################################################################################################
 ```
-You should setup configuration at the console GUI running at the given address... Ensure to use a very strong password. The running container is sharing a volume with the configuration data on your host. If your host reboots or you shutdown your image you will need to remove the existing image and run the bootstrap script again.  Logging is intentionally turned off and must be set in the bootstrap script prior to running it if you want to examine the logs.  You will have to manually kill the container and remove it before re-running the bootstrap script to enable logging.  Your configuration data is still on your host so when you rebuild the container it will be restored to the condition before you shut it down.
+You should setup configuration at the console GUI running at the given address... Ensure to use a very strong password. The running container is sharing a volume with the configuration data on your host. If your host reboots or you shutdown your container you will need to remove the existing container and run the bootstrap script again.  Logging is intentionally turned off and must be set in the bootstrap script prior to running it if you want to examine the logs.  You will have to manually kill the container and remove it before re-running the bootstrap script to enable logging.  Your configuration data is still on your host so when you rebuild the container it will be restored to the condition before you shut it down.
 
 # Useful Commands
 
@@ -112,14 +112,15 @@ docker rm domainserer
 
 # How to Build an Image
 
-We recognize that you may want to build your own image to run the Vircadia server. It may be for security or educational reasons. Whatever your reasons we will show you how we built the image we provided. There are a couple of caveats before we begin.  Our image is a whopping 325 megabytes.  We are using the Ubuntu 20.4.04 container to ensure compatibility with the deb package we have already created. If you are after a smaller or more performant image you can try to create it completely from scratch following MisterBlueGuy's build instructions: https://github.com/vircadia/vircadia-domain-server-docker. You can also try to use the dated package script found in the Vircadia build repository: https://github.com/vircadia/vircadia/tree/master/pkg-scripts.  We suspect the later will not work without some editing of the source.  Lastly, if you deviate much from the instructions we provide your container may grow larger in size or worst... not run at all.
+We recognize that you may want to build your own image to run the Vircadia server. It may be for security or educational reasons. Whatever your reasons we will show you how we built the image we provided. There are a couple of caveats before we begin.  Our image is a whopping 362 megabytes.  We are using the Ubuntu 20.4.04 container to ensure compatibility with the deb package we have already created. If you are after a smaller or more performant image you can try to create it completely from scratch following MisterBlueGuy's build instructions: https://github.com/vircadia/vircadia-domain-server-docker. You can also try to use the dated package script found in the Vircadia build repository: https://github.com/vircadia/vircadia/tree/master/pkg-scripts.  We suspect the later will not work without some editing of the source.  Lastly, if you deviate much from the instructions we provide your container may grow larger in size or worst... not run at all.
 
 NOTE: Technically you can run the container on any Linux distribution.  We recommend you run this on Ubuntu Server 20.4.04 with Docker installed and Internet access.  You can find the installation image on the Ubuntu website.
 
 https://releases.ubuntu.com/20.04.4/ubuntu-20.04.4-live-server-amd64.iso
 
--1. Run the following command from the terminal to pull the Ubuntu 20.4 image from Github.com (You can pull it from another repository if you know one). You will be working inside the container from this moment on.  The command puts you in the terminal of the container.
+-1. Run the following command from the terminal to pull the Ubuntu 20.4 image from hub.docker.com (You can pull it from another repository if you know one). You will be working inside the container from this moment on.  The command puts you in the terminal of the container.
 ```
+# Run the docker container
 docker run -it --entrypoint "/bin/bash" -e METAVERSE_URL=${METAVERSE_URL} --network=host ubuntu:20.04
 ```
 -2. Update the container
@@ -157,7 +158,7 @@ export HIFI_ASSIGNMENT_CLIENT_ASSET_SERVER_PORT=48003
 export HIFI_ASSIGNMENT_CLIENT_MESSAGES_MIXER_PORT=48004 
 export HIFI_ASSIGNMENT_CLIENT_ENTITY_SCRIPT_SERVER_PORT=48005 
 export HIFI_ASSIGNMENT_CLIENT_ENTITIES_SERVER_PORT=48006 
-
+export METAVERSE_URL=${METAVERSE_URL:-https://metaverse.vircadia.com/live}
 ```
 -6. Start the domain-server and assignment clients
 ```
@@ -165,8 +166,11 @@ export HIFI_ASSIGNMENT_CLIENT_ENTITIES_SERVER_PORT=48006
 ./opt/vircadia/assignment-client -n 6 &
 
 ```
--7. Commit and push you docker container to your repository.  You do not need to stop the container to commit it. Docker will pause it while it's being committed. 
+-7. Commit and push your docker container to your repository.  You do not need to stop the container to commit it. Docker will pause it while it's being committed. 
 ```
+# Press CTRL-p and q
+# This will put you back at the bash prompt of the host without killing the container.
+
 # Get the CONTAINER ID
 docker ps -a
 
